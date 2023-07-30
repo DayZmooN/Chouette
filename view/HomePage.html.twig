@@ -1,0 +1,27 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Accueil - Ma Messagerie Privée
+{% endblock %}
+
+{% block header %}
+	<header>
+		{% include "header.html.twig" %}
+	</header>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Découvrez notre service</h2>
+		<p>Ma Messagerie Privée est un service de messagerie sécurisé et privé, facile à utiliser et accessible partout.</p>
+	</section>
+
+	<section>
+		<h2>Inscrivez-vous</h2>
+		<p>Rejoignez notre communauté dès aujourd'hui et profitez de notre service de messagerie privée gratuit.</p>
+		<a href="{{ path('inscription') }}">Inscrivez-vous maintenant</a>
+	</section>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('/js/main.js') }}"></script>
+{% endblock %}

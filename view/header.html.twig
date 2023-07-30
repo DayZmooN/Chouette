@@ -1,0 +1,35 @@
+{% extends "template.html.twig" %}
+{% block header %}
+	<header>
+		<div class="header-limit-size">
+			<div class="logo">
+				<a href="{{ path('home') }}">
+					<h1>Chouette</h1>
+				</a>
+			</div>
+
+			<!-- search bar -->
+			<form action="#" method="GET" class="search-bar-form">
+				<div class="search-bar ">
+
+					<input type=" text" id="location-input" placeholder="Location">
+
+
+					<button type="submit" id="search-button">Search</button>
+
+				</div>
+			</form>
+			<nav>
+				<ul>
+					<a href="{{path('signin')}}">
+						<li>se connecter</li>
+					</a>
+					<li></li>
+					<li></li>
+				</ul>
+			</nav>
+
+
+		</div>
+	</header>
+{% endblock %}

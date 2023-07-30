@@ -1,0 +1,32 @@
+<?php
+session_start();
+$bdd = new PDO('mysql:host=localhost;dbname=chouette; charset=utf8;', 'root');
+
+if (!isset($_SESSION['pseudo'])) {
+    header('location: connexion.php');
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>message</title>
+</head>
+
+<body>
+    <form action="" method="post">
+
+        <textarea name="message" id="" cols="30" rows="10"></textarea>
+        <br>
+        <br>
+        <input type="submit" value="envoyer">
+    </form>
+    <section id="message">
+
+    </section>
+
+</body>
+
+</html>
