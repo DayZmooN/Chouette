@@ -11,6 +11,9 @@ body {
 }
 body a {
   text-decoration: none;
+  text-transform: none;
+  color: black;
+  cursor: pointer;
 }
 body li {
   list-style: none;
@@ -19,6 +22,8 @@ body header {
   width: 100%;
   height: 70px;
   background-color: black;
+  position: sticky;
+  top: 0;
 }
 body header .navbar {
   width: 100%;
@@ -100,7 +105,9 @@ body .container-bar-media {
 }
 body .container-bar-media .bar {
   width: 240px;
-  height: 100vh;
+  height: 100%;
+  top: 100px;
+  position: sticky;
   background-color: #ffffff;
 }
 body .container-bar-media .bar .picto-name {
@@ -123,14 +130,17 @@ body .container-bar-media .contain-limite-size {
   flex-direction: column;
 }
 body .container-bar-media .contain-limite-size .media-card {
+  width: 100%;
   max-width: 650px;
-  max-height: 600px;
+  max-height: 700px;
   display: flex;
+  align-items: center;
   height: 100%;
   margin: 10px;
   flex-direction: column;
 }
 body .container-bar-media .contain-limite-size .media-card .card {
+  width: 100%;
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -157,7 +167,6 @@ body .container-bar-media .contain-limite-size .media-card .card .btn-follow for
 body .container-bar-media .contain-limite-size .media-card .media {
   width: 100%;
   height: 100%;
-  max-width: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -168,11 +177,11 @@ body .container-bar-media .contain-limite-size .media-card .media .video-picture
 body .container-bar-media .contain-limite-size .media-card .media .video-picture .picture {
   width: 100%;
   height: 100%;
+  border-radius: 9px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 body .container-bar-media .contain-limite-size .media-card .media .conteneur-social {
-  border: 1px solid black;
   padding: 5px;
   gap: 10px;
   display: flex;
