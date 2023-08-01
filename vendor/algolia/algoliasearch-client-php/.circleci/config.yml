@@ -91,7 +91,7 @@ jobs:
                  php vendor/bin/phpunit --exclude-group=dictionaries
               fi
             else
-              export CI_PROJ_USERNAME=$CIRCLE_PR_USERNAME
+              export CI_PROJ_pseudo=$CIRCLE_PR_pseudo
               export CI_PROJ_REPONAME=$CIRCLE_PR_REPONAME
 
               if [ "<<parameters.version>>" == "latest" ] && [ "<<parameters.http_client>>" == "guzzlehttp/guzzle:"^7.0"" ]

@@ -75,7 +75,7 @@ interface UriInterface
      * The trailing "@" character is not part of the user information and MUST
      * NOT be added.
      *
-     * @return string The URI user information, in "username[:password]" format.
+     * @return string The URI user information, in "pseudo[:password]" format.
      */
     public function getUserInfo();
 

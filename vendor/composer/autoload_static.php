@@ -98,6 +98,7 @@ class ComposerStaticInitce708de37f59a76a2e76546b896b6035
         'UserController' => __DIR__ . '/../..' . '/controller/UserController.php',
         'UserFriends' => __DIR__ . '/../..' . '/class/UserFriend.php',
         'UserModel' => __DIR__ . '/../..' . '/model/UserModel.php',
+        'UserService' => __DIR__ . '/../..' . '/model/UserService.php',
         'UserSettings' => __DIR__ . '/../..' . '/class/UserSettings.php',
     );
 

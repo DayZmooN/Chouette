@@ -1,10 +1,10 @@
 <?php
 
-class UserModel extends Model
+class UserService extends Model
 {
-    public function findBypseudo($pseudo)
+    public static function findBypseudo($pseudo)
     {
-        $stmt = $this->getDb()->prepare("SELECT * FROM users WHERE pseudo = ?");
+        $stmt = self::getDb()->prepare("SELECT * FROM user WHERE pseudo = ?");
         $stmt->execute([$pseudo]);
         $data = $stmt->fetch();
 
@@ -20,13 +20,9 @@ class UserModel extends Model
         }
     }
 
-    public function create(User $user)
+    public static function create($pseudo, $password, $email)
     {
-        $pseudo = $user->getPseudo();
-        $password = $user->getMotDePasse();
-        $email = $user->getEmail();
-
-        $stmt = $this->getDb()->prepare("INSERT INTO users (pseudo, password, email) VALUES (?, ?, ?)");
+        $stmt = self::getDb()->prepare("INSERT INTO user (pseudo, password, email) VALUES (?, ?, ?)");
         $stmt->execute([$pseudo, $password, $email]);
     }
 }

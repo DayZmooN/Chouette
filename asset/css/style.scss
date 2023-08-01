@@ -126,6 +126,63 @@ body {
         }
     }
 
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+
+            form {
+                display: flex;
+                flex-direction: column;
+
+                input[type="text"],
+                input[type="password"] {
+                    margin-bottom: 10px;
+                }
+
+                input[type="submit"] {
+                    background-color: #0a8dab;
+                    color: white;
+                    padding: 10px;
+                    border: none;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #086788;
+                    }
+                }
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+
+            &:hover,
+            &:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+
     //HomePage
     .container-bar-media {
         width: 100%;
@@ -140,7 +197,6 @@ body {
             height: 100%;
             top: 100px;
             position: sticky;
-            background-color: #ffffff;
 
             .picto-name {
                 margin: 10px 10px;

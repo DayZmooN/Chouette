@@ -25,13 +25,37 @@
 			</div>
 
 			<div>
-				<button>
-					<a href="{{path('signin')}}" class="btn btn-success" id="create-account-btn">Sign in</a>
-				</button>
+				<button style="color:red;" id='modalButton'>
+					sign in</button>
 			</div>
-
+			<div>
+				<a href="{{ path('logout')}}">
+					<button style="color:red;" id='modalButton'>
+						log out</button>
+				</a>
+			</div>
 		</div>
 	</nav>
 
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Connexion</h2>
+			<form id="loginForm" action="{{ path('signin') }}" method="post">
+				<input type="text" id="pseudo" name="pseudo" placeholder="Nom d'utilisateur">
+				<input type="password" id="password" name="password" placeholder="Mot de passe">
+				<input type="submit" value="Se connecter">
+			</form>
 
-</div></header>
+			<h2>Inscription</h2>
+			<form id="signupForm" action="{{ path('register') }}" method="post">
+				<input type="text" id="newpseudo" name="pseudo" placeholder="Nom d'utilisateur">
+				<input type="password" id="newPassword" name="password" placeholder="Mot de passe">
+				<input type="email" id="email" name="email" placeholder="Email">
+				<input type="submit" value="S'inscrire">
+			</form>
+
+		</div>
+	</div>
+
+</header>

@@ -2,28 +2,65 @@
 class UserController extends Controller
 {
     private $userModel;
+    private $router;
 
-    public function __construct(UserModel $userModel)
+    public function __construct()
     {
-        $this->userModel = $userModel;
+        global $router;
+        $this->router = $router;
+        $this->userModel = new UserModel();
     }
 
-    public function getUser($id)
+    public function register()
     {
-        $user = $this->userModel->getUserById($id);
-        if ($user) {
-            // Générer une vue avec les informations de l'utilisateur...
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new User();
+            $user->setPseudo($_POST["pseudo"]);
+            $user->setMotDePasse(password_hash($_POST["password"], PASSWORD_DEFAULT));
+            $user->setEmail($_POST["email"]);
+
+            $existingUser = $this->userModel->findBypseudo($user->getPseudo());
+
+            if ($existingUser) {
+                echo json_encode(['status' => 'error', 'message' => 'A user with this pseudo already exists.']);
+            } else {
+                $this->userModel->create($user);
+                echo json_encode(['status' => 'success']);
+            }
         } else {
-            // Gérer le cas où l'utilisateur n'existe pas...
+            echo self::getRender('register.html.twig', []);
         }
     }
 
-
-    public function signin()
+    public function login()
     {
-        echo self::getRender('signin.html.twig', []);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $pseudo = $_POST["pseudo"];
+            $password = $_POST["password"];
+
+            $user = $this->userModel->findBypseudo($pseudo);
+
+            if ($user && password_verify($password, $user->getMotDePasse())) {
+                $_SESSION['id'] = $user->getId();
+                $_SESSION['pseudo'] = $user->getPseudo();
+                $_SESSION['is_connected'] = true;
+
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Invalid pseudo or password.']);
+            }
+        } else {
+            echo self::getRender('login.html.twig', []);
+        }
     }
 
+    public function logout()
+    {
+        session_start();
+        session_destroy();
 
-    // D'autres méthodes pour gérer les requêtes liées à l'utilisateur...
+        echo json_encode(['status' => 'success']);
+    }
+
+    // Ajoutez d'autres méthodes ici au besoin
 }

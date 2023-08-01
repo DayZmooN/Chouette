@@ -32,5 +32,6 @@ return array(
     'UserController' => $baseDir . '/controller/UserController.php',
     'UserFriends' => $baseDir . '/class/UserFriend.php',
     'UserModel' => $baseDir . '/model/UserModel.php',
+    'UserService' => $baseDir . '/model/UserService.php',
     'UserSettings' => $baseDir . '/class/UserSettings.php',
 );
