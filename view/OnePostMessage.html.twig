@@ -1,0 +1,17 @@
+{% extends "template.html.twig" %}
+
+
+{% block content %}
+
+	<div class="message-container">
+		{% for postMessages in postMessage %}
+			<div class="message {% if postMessages.senderId == app.session.id %}sent{% else %}received{% endif %}">
+				<p class='p-message'>
+					<strong>{{ postMessages.pseudo }}</strong>:
+					{{ postMessages.message }}
+				</p>
+				<p class='sent_at'>{{ postMessages.sent_at }}</p>
+			</div>
+		{% endfor %}
+	</div>
+</section>{% endblock %}

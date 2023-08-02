@@ -1,0 +1,94 @@
+{% extends "template.html.twig" %}
+
+
+{% block content %}
+	<section class="messenger ">
+		<div
+			class="container-messenger">
+
+			<!-- search and contact -->
+			<div class="search-message-contact">
+				<div class="search">
+					<div class="icon-search">
+						<img src="../asset/media/icon/magnifying-glass-solid.svg" alt="icon search">
+					</div>
+					<div class="input-search">
+						<input type="search" name="search" id="search" placeholder="Search in Messages">
+					</div>
+					<div class="icon-search">
+						<img src="../asset/media/icon/search-fleche.svg" alt="fleche search">
+					</div>
+
+				</div>
+				<!-- message with contact -->
+				{% for postMessages in postMessage %}
+					<div class="card-message" data-id="{{ postMessages.id }}">
+						<div class="picture-username">
+							<div class="picture-message">
+								<img class="avatar" src="{{asset('/media/picto/burger.png')}}" alt="">
+							</div>
+							<div class="username">
+								<span>{{ postMessages.pseudo }}</span>
+							</div>
+						</div>
+						<div class="online-time">
+							<div class="stat-time">
+								<div class="status"></div>
+								<span class="time">{{ postMessages.sent_at }}</span>
+							</div>
+						</div>
+						<p>{{postMessages.message}}</p>
+					</div>
+				{% endfor %}
+
+			</div>
+			<div class="user-online-send-messages">
+				<div class="container-online-user">
+					<div class="user">
+						<div class="avatar">
+							<img src="{{asset('/media/picto/burger.png')}}" alt="">
+						</div>
+						<div class="name">
+							<span>Nom de l'utilisateur</span>
+						</div>
+						<div class="status"></div>
+					</div>
+				</div>
+			</div<divclass="user-online-send-messages">
+			<div class="container-online-user">
+				{% for user in users %}
+					<div class="user">
+						<div
+							class="avatar">
+							<!-- Remplacez 'path_to_avatar' par le chemin de l'avatar de l'utilisateur -->
+							<img src="{{asset(user.path_to_avatar)}}" alt="">
+						</div>
+						<div class="name">{{ user.pseudo }}</div>
+						<div class="status"></div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="message-container">
+				{% for message in messages %}
+					{% if message.sender_id == user.id %}
+						<div class="message sent">
+							<p class='p-message'>{{ message.content }}</p>
+						</div>
+					{% else %}
+						<div class="message received">
+							<p class='p-message'>{{ message.content }}</p>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+
+			<form
+				class="message-form" method="post" action="{{ path('send_message', {'recipientId': recipientId}) }}">
+				<!-- ... -->
+				<textarea id="message-input" name="message" placeholder="Votre message"></textarea>
+				<button id="send-button">Envoyer</button>
+			</form>
+		</div>
+	</div>
+</section>{% endblock %}

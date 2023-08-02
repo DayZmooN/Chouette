@@ -29,4 +29,10 @@ class UserModel extends Model
         $stmt = $this->getDb()->prepare("INSERT INTO users (pseudo, password, email) VALUES (?, ?, ?)");
         $stmt->execute([$pseudo, $password, $email]);
     }
+
+    public function getAllUsers()
+    {
+        $stmt = $this->getDb()->query("SELECT * FROM users");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -14,6 +14,7 @@ return array(
     'ErrorController' => $baseDir . '/controller/ErrorController.php',
     'Hashtags' => $baseDir . '/class/Hashtag.php',
     'HomeController' => $baseDir . '/controller/HomeCotroller.php',
+    'Message' => $baseDir . '/class/Message.php',
     'MessageController' => $baseDir . '/controller/MessageController.php',
     'MessageModel' => $baseDir . '/model/MessageModel.php',
     'Model' => $baseDir . '/model/Model.php',

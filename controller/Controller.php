@@ -41,13 +41,13 @@ abstract class Controller
     {
         global $router;
 
-        echo self::getTwig()->render($template, $datas);
+        return self::getTwig()->render($template, $datas);
     }
 
     protected static function getRender($template, $datas)
     {
         if (self::$render === null) {
-            self::setRender($template, $datas);
+            self::$render = self::setRender($template, $datas); // Utilisez setRender() pour assigner le rendu
         }
         return self::$render;
     }

@@ -49,70 +49,87 @@
 			</div>
 		</div>
 		<div class="contain-limite-size">
-			<div class="media-card">
-				<div class="card">
-					<div class="avatar-name-title">
-						<div class="avatar">
-							<img style='width:40px; border:1px solid black; border-radius:999px;' src="{{asset('/media/picto/burger.png')}}" alt="karim"></div>
-						<div class="name-title-media">
-							<div class="name">
-								<span>karim</span>
+			{% for post in posts %}
+				<div class="media-card">
+					<div class="card">
+						<div class="avatar-name-title">
+							<div class="avatar">
+								<img style='width:40px; border:1px solid black; border-radius:999px;' src="{{asset('/media/picto/burger.png')}}" alt="karim"></div>
+							<div class="name-title-media">
+								<div class="name">
+									<a href="{{ messenger }}{{ post.user_id }}">
+										<span>{{ post.pseudo }}{{ post.user_id }}</span>
+									</a>
+									<!-- Remplacer par le nom d'utilisateur réel si possible -->
+								</div>
+								<div class="title">
+									<span>{{ post.content }}</span>
+								</div>
 							</div>
-							<div class="title">
-								<span>grand jeux
-								</span>
+						</div>
+
+						<div class="btn-follow">
+							<a href="{{ path('messengerUser_id') }}/{{ post.user_id }}">Message</a>
+						</div>
+
+
+						<div class="btn-follow">
+							<form action="" method="POST">
+								<input type="submit" value="Follow">
+							</form>
+						</div>
+
+					</div>
+					<div class="media">
+						<div class="video-picture">
+							<img
+							class='picture' src="{{asset('/media/picture/avatar.jpg')}}" alt="Avatar">
+							<!-- Remplacer par le chemin du fichier média réel si possible -->
+							<video src=""></video>
+						</div>
+						<div class="conteneur-social">
+							<div class="like social">
+								<form action="" method="post">
+									<div class="picto-favoris">
+										<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
+									</div>
+									<span>like</span>
+								</form>
+							</div>
+							<div class="message social">
+								<a href="#">
+									<div class="picto-favoris">
+
+										<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
+									</div>
+									<span>message</span>
+								</a>
+							</div>
+							<div class="Rating social">
+								<form action="" method="post">
+									<div class="picto-favoris">
+										<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
+									</div>
+									<span>Favoris</span>
+								</form>
+							</div>
+							<div class="share social">
+								<form action="" method="post">
+									<div class="picto-favoris">
+										<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
+									</div>
+									<span>shares</span>
+								</form>
 							</div>
 						</div>
 					</div>
-					<div class="btn-follow">
-						<form action="" method="POST">
-							<input type="submit" value="Follow">
-						</form>
-					</div>
-				</div>
-				<div class="media">
-					<div class="video-picture">
-						<img class='picture' src="{{asset('/media/picture/avatar.jpg')}}" alt="Avatar">
-						<video src=""></video>
-					</div>
-					<div class="conteneur-social">
-						<div class="like social">
-							<form action="" method="post">
-								<div class="picto-favoris">
-									<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
-								</div>
-								<span>like</span>
-							</form>
-						</div>
-						<div class="message social">
-							<a href="#">
-								<div class="picto-favoris">
 
-									<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
-								</div>
-								<span>message</span>
-							</a>
-						</div>
-						<div class="Rating social">
-							<form action="" method="post">
-								<div class="picto-favoris">
-									<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
-								</div>
-								<span>Favoris</span>
-							</form>
-						</div>
-						<div class="share social">
-							<form action="" method="post">
-								<div class="picto-favoris">
-									<img style="width:24px;" src="{{asset('/media/picto/burger.png')}}" alt="">
-								</div>
-								<span>shares</span>
-							</form>
-						</div>
-					</div>
 				</div>
 
-			</div>
+
+			{% endfor %}
+
+
 		</div>
 	</section>
 {% endblock %}

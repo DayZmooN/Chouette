@@ -24,16 +24,37 @@
 
 			</div>
 
-			<div>
-				<button style="color:red;" id='modalButton'>
-					sign in</button>
+
+			{% if session.is_connected %}
+				<div class="picture-pseudo-btn">
+					<div class="picture-pseudo-msg">
+						<div class="msg">
+							<a href="{{ path('messenger') }}">
+								<img class="img-avatar" src="{{ asset('/media/picto/message.svg')}}" alt="">
+								<div class="number-msg">
+									<span>1</span>
+								</div>
+							</a>
+						</div>
+
+						<div class="avatar-profil">
+							<a href="">
+								<img src="{{ asset('/media/images/burger.png' ) }}" alt="">
+
+							</a>
+						</div>
+						<div class="pseudo">
+							<span style="color:white">{{ session.pseudo }}</span>
+						</div>
+					</div>
+					<a href="{{ path('logout') }}">
+						<button style="color:red;" id='logoutButton'>Log out</button>
+					</a>
+				{% else %}
+					<button style="color:red;" id='modalButton'>Sign in</button>
+				{% endif %}
 			</div>
-			<div>
-				<a href="{{ path('logout')}}">
-					<button style="color:red;" id='modalButton'>
-						log out</button>
-				</a>
-			</div>
+
 		</div>
 	</nav>
 
@@ -57,5 +78,4 @@
 
 		</div>
 	</div>
-
 </header>

@@ -80,6 +80,7 @@ class ComposerStaticInitce708de37f59a76a2e76546b896b6035
         'ErrorController' => __DIR__ . '/../..' . '/controller/ErrorController.php',
         'Hashtags' => __DIR__ . '/../..' . '/class/Hashtag.php',
         'HomeController' => __DIR__ . '/../..' . '/controller/HomeCotroller.php',
+        'Message' => __DIR__ . '/../..' . '/class/Message.php',
         'MessageController' => __DIR__ . '/../..' . '/controller/MessageController.php',
         'MessageModel' => __DIR__ . '/../..' . '/model/MessageModel.php',
         'Model' => __DIR__ . '/../..' . '/model/Model.php',

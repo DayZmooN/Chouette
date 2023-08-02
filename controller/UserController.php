@@ -25,12 +25,33 @@ class UserController extends Controller
                 echo json_encode(['status' => 'error', 'message' => 'A user with this pseudo already exists.']);
             } else {
                 $this->userModel->create($user);
-                echo json_encode(['status' => 'success']);
+
+                // Suppose that $userId is the unique ID of the user after a successful registration.
+                $userId = $user->getId();
+                $pseudo = $user->getPseudo();  // <--- Add this line
+
+                // Define the path of the user directory.
+                $userDirectory = __DIR__ . "/../asset/media/uploads/{$userId}_{$pseudo}";
+
+                $userPhotosDirectory = "{$userDirectory}/photos";
+                $userVideosDirectory = "{$userDirectory}/videos";
+
+                // Create the user directory, if it does not already exist.
+                if (!file_exists($userPhotosDirectory)) {
+                    mkdir($userPhotosDirectory, 0777, true);
+                }
+                if (!file_exists($userVideosDirectory)) {
+                    mkdir($userVideosDirectory, 0777, true);
+                }
+                global $router;
+                // echo json_encode(['status' => 'success']);
+                header('Location: ' .  $router->generate('home'));
             }
         } else {
             echo self::getRender('register.html.twig', []);
         }
     }
+
 
     public function login()
     {
@@ -44,8 +65,9 @@ class UserController extends Controller
                 $_SESSION['id'] = $user->getId();
                 $_SESSION['pseudo'] = $user->getPseudo();
                 $_SESSION['is_connected'] = true;
-
-                echo json_encode(['status' => 'success']);
+                global $router;
+                // echo json_encode(['status' => 'success']);
+                header('Location: ' . $router->generate('home'));
             } else {
                 echo json_encode(['status' => 'error', 'message' => 'Invalid pseudo or password.']);
             }
@@ -54,13 +76,14 @@ class UserController extends Controller
         }
     }
 
+
+
     public function logout()
     {
-        session_start();
         session_destroy();
-
-        echo json_encode(['status' => 'success']);
+        global $router;
+        // echo json_encode(['status' => 'success']);
+        header('Location: ' . $router->generate('home'));
+        exit();
     }
-
-    // Ajoutez d'autres méthodes ici au besoin
 }
