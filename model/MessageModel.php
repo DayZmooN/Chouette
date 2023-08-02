@@ -14,10 +14,10 @@ class MessageModel extends Model
     // }
 
 
-    public function getMessagesBetweenUsers($userId, $recipientId)
+    public function getMessagesBetweenUsers($userId, $receiverId)
     {
         $stmt = $this->getDb()->prepare("SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY sent_at ASC");
-        $stmt->execute([$userId, $recipientId, $recipientId, $userId]);
+        $stmt->execute([$userId, $receiverId, $receiverId, $userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

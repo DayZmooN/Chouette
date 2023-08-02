@@ -44,51 +44,42 @@
 			</div>
 			<div class="user-online-send-messages">
 				<div class="container-online-user">
-					<div class="user">
+					<div class="user" data-user-id="{{ user.id }}">
+
 						<div class="avatar">
-							<img src="{{asset('/media/picto/burger.png')}}" alt="">
+							<img src="{{ asset('/media/picto/burger.png') }}" alt="">
 						</div>
 						<div class="name">
-							<span>Nom de l'utilisateur</span>
+							<span>{{ user.pseudo }}</span>
 						</div>
 						<div class="status"></div>
 					</div>
+
+
 				</div>
-			</div<divclass="user-online-send-messages">
-			<div class="container-online-user">
-				{% for user in users %}
-					<div class="user">
-						<div
-							class="avatar">
-							<!-- Remplacez 'path_to_avatar' par le chemin de l'avatar de l'utilisateur -->
-							<img src="{{asset(user.path_to_avatar)}}" alt="">
-						</div>
-						<div class="name">{{ user.pseudo }}</div>
-						<div class="status"></div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="message-container">
-				{% for message in messages %}
-					{% if message.sender_id == user.id %}
-						<div class="message sent">
-							<p class='p-message'>{{ message.content }}</p>
-						</div>
-					{% else %}
-						<div class="message received">
-							<p class='p-message'>{{ message.content }}</p>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
+
+				<div class="message-container">
+					{% for message in messages %}
+						{% if message.sender_id == user.id %}
+							<div class="message sent">
+								<p class='p-message'>{{ message.content }}</p>
+							</div>
+						{% else %}
+							<div class="message received">
+								<p class='p-message'>{{ message.content }}</p>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
 
 
-			<form
-				class="message-form" method="post" action="{{ path('send_message', {'recipientId': recipientId}) }}">
-				<!-- ... -->
-				<textarea id="message-input" name="message" placeholder="Votre message"></textarea>
-				<button id="send-button">Envoyer</button>
-			</form>
+				<form
+					class="message-form" method="post" action="{{ path('send_message', {'recipientId': recipientId}) }}">
+					<!-- ... -->
+					<textarea id="message-input" name="message" placeholder="Votre message"></textarea>
+					<button id="send-button">Envoyer</button>
+				</form>
+			</div>
 		</div>
-	</div>
-</section>{% endblock %}
+	</section>
+{% endblock %}

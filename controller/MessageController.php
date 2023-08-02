@@ -12,6 +12,7 @@ class MessageController extends Controller
         echo self::getRender('messenger.html.twig', ['postMessage' => $postMessage]);
     }
 
+
     // public function showConversation($receiverId)
     // {
     //     $messageModel = new MessageModel;
@@ -21,18 +22,18 @@ class MessageController extends Controller
     //     $user = $userModel->findBypseudo($senderId);
 
     //     echo self::getRender('messenger.html.twig', ['user' => $user, 'messages' => $messages]);
-    // }
     public function showConversation($receiverId)
     {
         $messageModel = new MessageModel;
         $userModel = new UserModel;
         $senderId = $_SESSION['id'];
-        $messages = $messageModel->getMessagesBetweenUsers($senderId, $receiverId);
         $user = $userModel->findBypseudo($senderId);
+        $messages = $messageModel->getMessagesBetweenUsers($senderId, $receiverId);
 
         header('Content-Type: application/json');
         echo json_encode(['user' => $user, 'messages' => $messages]);
     }
+
 
 
 

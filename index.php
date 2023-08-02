@@ -20,7 +20,7 @@ $router->map('POST', '/signin', 'UserController#login', 'signin');
 $router->map('GET', '/messenger', 'MessageController#messenger', 'messenger');
 
 
-$router->map('GET|POST', '/get_messages/[i:receiverId]', 'MessageController#showConversation', '/get_messages');
+$router->map('GET', '/get_messages/[i:receiverId]', 'MessageController#showConversation', 'get_messages/');
 
 
 

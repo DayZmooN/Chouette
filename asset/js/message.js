@@ -30,40 +30,113 @@
 
 
 // Dans votre fichier JavaScript
+// Fonction pour afficher les messages entre l'utilisateur connecté et le destinataire
+// function showMessagesWithUser(recipientId, recipientPseudo) {
+//     let senderId = document.querySelector('.user').dataset.userId;
+
+//     // Mettre à jour le span avec le pseudo du destinataire
+//     document.querySelector('.name span').textContent = recipientPseudo;
+
+//     // Effectuer une requête Fetch pour obtenir les messages
+//     fetch('/get_messages/' + recipientId)
+//         .then(response => response.json())
+//         .then(data => {
+//             // Supprimer les anciens messages
+//             let messageContainer = document.querySelector('.message-container');
+//             messageContainer.innerHTML = '';
+
+//             // Parcourir les messages et les ajouter au container
+//             data.messages.forEach(message => {
+//                 let messageDiv = document.createElement('div');
+//                 let messageP = document.createElement('p');
+//                 messageP.className = 'p-message';
+//                 messageP.textContent = message.content;
+
+//                 if (message.sender_id == senderId) {
+//                     messageDiv.className = 'message sent';
+//                 } else {
+//                     messageDiv.className = 'message received';
+//                 }
+
+//                 messageDiv.appendChild(messageP);
+//                 messageContainer.appendChild(messageDiv);
+//             });
+//         })
+//         .catch(error => {
+//             console.error('Error fetching messages:', error);
+//         });
+// }
+
+// // Écouter le clic sur les cartes "card-message"
+// document.querySelectorAll('.card-message').forEach(card => {
+//     card.addEventListener('click', function () {
+//         let recipientId = this.dataset.id;
+//         let recipientPseudo = this.querySelector('.username span').textContent;
+
+//         // Appeler la fonction pour afficher les messages avec le destinataire
+//         showMessagesWithUser(recipientId, recipientPseudo);
+//     });
+// });
+
+// // Notez que vous pouvez également appeler la fonction showMessagesWithUser() directement lors du chargement de la page pour afficher les messages avec le premier destinataire par défaut.
+
+
+
+
+
+///
+
+
+
+// Écouter le clic sur les cartes "card-message"
 document.querySelectorAll('.card-message').forEach(card => {
     card.addEventListener('click', function () {
         let recipientId = this.dataset.id;
+        let recipientPseudo = this.querySelector('.username span').textContent;
 
-        // Maintenant que vous avez l'ID du destinataire, vous pouvez l'utiliser dans votre requête Fetch
-        fetch('get_messages' + recipientId)
-            .then(response => response.json())
-            .then(messages => {
-                let messageContainer = document.querySelector('.message-container');
-                messageContainer.innerHTML = ''; // on vide le container
-
-                messages.forEach(message => {
-                    let messageDiv = document.createElement('div');
-                    let messageP = document.createElement('p');
-                    messageP.className = 'p-message';
-                    messageP.textContent = message.content;
-
-                    if (message.sender_id == senderId) {
-                        messageDiv.className = 'message sent';
-                    } else {
-                        messageDiv.className = 'message received';
-                    }
-
-                    messageDiv.appendChild(messageP);
-                    messageContainer.appendChild(messageDiv);
-                });
-            })
-            .catch(err => {
-                console.log('error', err);
-            });
+        // Appeler la fonction pour afficher les messages avec le destinataire
+        showMessagesWithUser(recipientId, recipientPseudo);
     });
 });
 
+// Fonction pour afficher les messages entre l'utilisateur connecté et le destinataire
+function showMessagesWithUser(recipientId, recipientPseudo) {
+    let senderId = document.querySelector('.user').dataset.userId;
 
+    // Mettre à jour le span avec le pseudo du destinataire
+    document.querySelector('.name span').textContent = recipientPseudo;
 
+    // Effectuer une requête Fetch pour obtenir les messages
+    fetch('get_messages/' + recipientId)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Supprimer les anciens messages
+            let messageContainer = document.querySelector('.message-container');
+            messageContainer.innerHTML = '';
 
+            // Parcourir les messages et les ajouter au container
+            data.messages.forEach(message => {
+                let messageDiv = document.createElement('div');
+                let messageP = document.createElement('p');
+                messageP.className = 'p-message';
+                messageP.textContent = message.content;
 
+                if (message.sender_id == senderId) {
+                    messageDiv.className = 'message sent';
+                } else {
+                    messageDiv.className = 'message received';
+                }
+
+                messageDiv.appendChild(messageP);
+                messageContainer.appendChild(messageDiv);
+            });
+        })
+        .catch(error => {
+            console.log('Error fetching messages:', error);
+        });
+}
