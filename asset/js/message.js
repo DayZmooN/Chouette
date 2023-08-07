@@ -124,7 +124,7 @@ function showMessagesWithUser(recipientId, recipientPseudo) {
                 let messageDiv = document.createElement('div');
                 let messageP = document.createElement('p');
                 messageP.className = 'p-message';
-                messageP.textContent = message.content;
+                messageP.textContent = message.message;
 
                 if (message.sender_id == senderId) {
                     messageDiv.className = 'message sent';
@@ -140,3 +140,4 @@ function showMessagesWithUser(recipientId, recipientPseudo) {
             console.log('Error fetching messages:', error);
         });
 }
+

@@ -22,7 +22,13 @@
 
 
 		<main>
-			{% block content %}{% endblock %}
+			{% block content %}
+				{% if not user %}
+					<script type="text/javascript">
+						window.location.href = '{{ home }}';
+					</script>
+				{% endif %}
+			{% endblock %}
 		</main>
 
 		{% include 'footer.html.twig' %}

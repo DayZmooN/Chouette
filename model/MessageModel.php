@@ -23,6 +23,7 @@ class MessageModel extends Model
 
 
 
+
     //
 
     // public function saveMessage($senderId, $recipientId, $messageContent)
@@ -49,7 +50,6 @@ class MessageModel extends Model
 
     // public function getConversationByUserId($userId)
     // {
-    //     $db = $this->getDb();
 
     //     $query = $db->prepare("SELECT * FROM messages WHERE sender_id = :userId OR recipient_id = :userId ORDER BY created_at ASC");
     //     $query->bindParam(':userId', $userId, PDO::PARAM_INT);
@@ -61,13 +61,23 @@ class MessageModel extends Model
     //  elle recuper tous le conversation qu'un utilisateur a eu 
     public function getUsersWithMessages()
     {
+        // Si $_SESSION['id'] n'est pas défini, redirigez vers la page de connexion
+        if (!isset($_SESSION['id'])) {
+            header('Location: /home');
+            exit;
+        }
+
+        // Si $_SESSION['id'] est défini, utilisez-le comme $userId
+        $userId = $_SESSION['id'];
+
         $stmt = $this->getDb()->prepare("
             SELECT DISTINCT users.id, users.pseudo, messages.message, messages.sent_at
             FROM users 
             INNER JOIN messages ON users.id = messages.sender_id OR users.id = messages.receiver_id
             WHERE ((messages.sender_id = ? AND users.id != ?) OR (messages.receiver_id = ? AND users.id != ?));
         ");
-        $stmt->execute([$_SESSION['id'], $_SESSION['id'], $_SESSION['id'], $_SESSION['id']]);
+        $stmt->execute([$userId, $userId, $userId, $userId]);
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

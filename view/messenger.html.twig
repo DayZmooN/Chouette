@@ -60,14 +60,16 @@
 
 				<div class="message-container">
 					{% for message in messages %}
-						{% if message.sender_id == user.id %}
-							<div class="message sent">
-								<p class='p-message'>{{ message.content }}</p>
-							</div>
-						{% else %}
-							<div class="message received">
-								<p class='p-message'>{{ message.content }}</p>
-							</div>
+						{% if message.sender_id == user.id or message.receiver_id == user.id %}
+							{% if message.sender_id == user.id %}
+								<div class="message sender sent">
+									<p class='p-message'>{{ message.message }}</p>
+								</div>
+							{% else %}
+								<div class="message received">
+									<p class='p-message receive'>{{ message.message }}</p>
+								</div>
+							{% endif %}
 						{% endif %}
 					{% endfor %}
 				</div>

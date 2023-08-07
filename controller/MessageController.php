@@ -22,17 +22,31 @@ class MessageController extends Controller
     //     $user = $userModel->findBypseudo($senderId);
 
     //     echo self::getRender('messenger.html.twig', ['user' => $user, 'messages' => $messages]);
+
+
+    // public function showConversation($receiverId)
+    // {
+    //     $messageModel = new MessageModel;
+    //     $userModel = new UserModel;
+    //     $senderId = $_SESSION['id'];
+    //     $user = $userModel->findBypseudo($senderId);
+    //     $messages = $messageModel->getMessagesBetweenUsers($senderId, $receiverId);
+
+    //     header('Content-Type: application/json');
+    //     echo json_encode(['user' => $user, 'messages' => $messages]);
+    // }
+
     public function showConversation($receiverId)
     {
         $messageModel = new MessageModel;
-        $userModel = new UserModel;
         $senderId = $_SESSION['id'];
-        $user = $userModel->findBypseudo($senderId);
         $messages = $messageModel->getMessagesBetweenUsers($senderId, $receiverId);
 
         header('Content-Type: application/json');
-        echo json_encode(['user' => $user, 'messages' => $messages]);
+        echo json_encode(['messages' => $messages]);
     }
+
+
 
 
 

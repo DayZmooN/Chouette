@@ -17,11 +17,14 @@ $router->map('POST', '/register', 'UserController#register', 'register');
 // Route de connexion
 $router->map('POST', '/signin', 'UserController#login', 'signin');
 //route pour recuperer tous les contacts avec on a echanger 
-$router->map('GET', '/messenger', 'MessageController#messenger', 'messenger');
+$router->map('GET|POST', '/messenger', 'MessageController#messenger', 'messenger');
 
 
 $router->map('GET', '/get_messages/[i:receiverId]', 'MessageController#showConversation', 'get_messages/');
 
+
+// last
+$router->map('GET', '/last_messages', 'MessageController#lastMessage', 'last_messages');
 
 
 
